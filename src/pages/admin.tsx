@@ -12,7 +12,7 @@ export default function Admin() {
   });
 
   const submitPost = () => {
-    let createdDate = new Date();
+    const createdDate = new Date();
 
     if (Object.values(formData).some((value) => value === "")) {
       alert("Preencha todo o formulário antes de enviar!");
@@ -68,8 +68,8 @@ export default function Admin() {
               Blog
             </p>
             <p className="mt-1 text-sm leading-6 text-gray-600">
-              Ao finalizar clique em "Salvar" e em seguida clique em
-              "Confirmar".
+              Ao finalizar clique em &quot;Salvar&quot; e em seguida clique em
+              &quot;Confirmar&quot;.
             </p>
           </div>
           <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">

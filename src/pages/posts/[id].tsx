@@ -1,6 +1,5 @@
 import axios from "axios";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
-import { useState } from "react";
 
 interface Post {
   id: string;
@@ -9,10 +8,6 @@ interface Post {
   content: string;
   createdAt: string;
   author: string;
-}
-
-interface PostProps {
-  post: Post;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
