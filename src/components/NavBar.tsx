@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 const activeStyle =
   "block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white";
@@ -9,6 +10,9 @@ const normalStyle =
 
 export const NavBar = () => {
   const route = useRouter();
+  const [displayDropDown, setDisplayDropDown] = useState(false);
+
+  const handleToggleDropDown = () => setDisplayDropDown(!displayDropDown);
 
   return (
     <nav className="w-full h-16 bg-gray-800">
@@ -20,6 +24,7 @@ export const NavBar = () => {
               className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               aria-controls="mobile-menu"
               aria-expanded="false"
+              onClick={handleToggleDropDown}
             >
               <span className="absolute -inset-0.5"></span>
               <span className="sr-only">Open main menu</span>
@@ -56,7 +61,7 @@ export const NavBar = () => {
           </div>
           <div className="flex flex-1 items-center justify-between sm:items-stretch sm:justify-between">
             <div className="flex flex-shrink-0 items-center">
-              <Link href={"/"}>
+              <Link onClick={() => setDisplayDropDown(false)} href={"/"}>
                 <Image
                   className="h-6 w-auto"
                   width={500}
@@ -88,16 +93,23 @@ export const NavBar = () => {
         </div>
       </div>
 
-      <div className="sm:hidden" id="mobile-menu">
+      <div
+        className={`bg-gray-800 absolute w-full ${
+          !displayDropDown && "hidden"
+        } `}
+        id="mobile-menu"
+      >
         <div className="space-y-1 px-2 pb-3 pt-2">
           <Link
             href="/"
+            onClick={handleToggleDropDown}
             className={route.asPath === "/" ? activeStyle : normalStyle}
           >
             Blog posts
           </Link>
           <Link
             href="/admin"
+            onClick={handleToggleDropDown}
             className={route.asPath === "/admin" ? activeStyle : normalStyle}
           >
             Administração
